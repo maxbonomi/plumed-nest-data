@@ -1,0 +1,10 @@
+The clustering is done in two steps:
+1) calculation of the RMSD matrix in parallel over multiple CPUs/cores (this directory)
+2) processing of the RMSD matrix and actual clustering with gromos algorithm (serial, in 3.3-GROMOS/)
+
+To calculate the RMSD matrix, you need to:
+
+- install the MDAnalysis python library - see instructions here: https://www.mdanalysis.org
+
+- run it on a cluster as an array job (with 128 tasks in this example) after updating the slurm file included here (example.slurm).
+  Please adapt to your queue system if different from slurm! 

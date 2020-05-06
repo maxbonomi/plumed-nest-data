@@ -1,0 +1,15 @@
+# include topology info
+MOLINFO STRUCTURE=../../0-TOPO/step5_charmm2gmx.pdb
+
+# define all atoms
+prot: GROUP NDX_FILE=../../0-TOPO/index.ndx NDX_GROUP=PROT
+
+# make protein whole
+WHOLEMOLECULES ...
+ADDREFERENCE 
+ENTITY0=1-6701         REF0=5.3607,4.5911,3.1497
+ENTITY1=6702-6741      REF1=3.2439,3.3684,6.0308
+... WHOLEMOLECULES
+
+# PRINT ATOM POSITIONS
+DUMPATOMS STRIDE=1 FILE=test.gro ATOMS=prot
