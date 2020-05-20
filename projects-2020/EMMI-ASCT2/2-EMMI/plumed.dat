@@ -3,7 +3,7 @@
 
 # load extra file
 # set to correct location
-#LOAD FILE=EMMIVox.cpp
+LOAD FILE=EMMIVox.cpp
 
 # include topology info - set path a PDB file
 MOLINFO STRUCTURE=../0-TOPO/step5_charmm2gmx.pdb
