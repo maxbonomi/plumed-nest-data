@@ -23,7 +23,7 @@
 #include "colvar/ActionRegister.h"
 #include "core/PlumedMain.h"
 #include "tools/Matrix.h"
-#include "core/SetupMolInfo.h"
+#include "core/GenericMolInfo.h"
 #include "core/ActionSet.h"
 #include "tools/File.h"
 #include "tools/OpenMP.h"
@@ -691,7 +691,7 @@ vector<double> EMMIVOX::get_GMM_m(vector<AtomNumber> &atoms)
   // list of weights - one per atom
   vector<double> GMM_m_w;
 
-  vector<SetupMolInfo*> moldat=plumed.getActionSet().select<SetupMolInfo*>();
+  vector<GenericMolInfo*> moldat=plumed.getActionSet().select<GenericMolInfo*>();
   // map of atom types to A and B coefficients of scattering factor
   // f(s) = A * exp(-B*s**2)
   // B is in Angstrom squared
