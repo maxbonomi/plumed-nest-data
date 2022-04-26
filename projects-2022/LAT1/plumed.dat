@@ -1,0 +1,27 @@
+####### Edited by KKH on 08/17/21  #############
+# load extra file
+LOAD FILE=EMMIVox.cpp
+
+# include topology info - set path a PDB file
+MOLINFO STRUCTURE=gromacs.pdb WHOLE
+
+# define all heavy atoms - set path to index file
+protein-h: GROUP NDX_FILE=index2.ndx NDX_GROUP=Protein-H_lig-H
+
+# make protein whole and in the cell where map is defined
+WHOLEMOLECULES ...
+ADDREFERENCE
+EMST
+ENTITY0=1-7317
+ENTITY1=7318-7368
+... WHOLEMOLECULES
+
+# create EMMI score
+# parameters  #NEED TO EDIT
+gmm: EMMIVOX TEMP=300.0 NL_STRIDE=50 NL_CUTOFF=0.5 NS_CUTOFF=1.0 NO_AVER ATOMS=protein-h DATA_FILE=map_plumed_align.dat NORM_DENSITY=1354.3429 RESOLUTION=0.1 VOXEL=0.1087 SIGMA_MIN=0.2 STATUS_FILE=EMMIStatus WRITE_STRIDE=2500 NOISETYPE=MARGINAL
+
+# translate into bias - updated every 2 time steps
+emr: BIASVALUE ARG=gmm.scoreb STRIDE=2
+
+# print output to file
+PRINT ARG=gmm.* FILE=COLVAR STRIDE=2500
